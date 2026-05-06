@@ -1,0 +1,7 @@
+datasets
+openai
+torch
+torchcodec
+soundfile
+librosa
+numpy
