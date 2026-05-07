@@ -1,0 +1,650 @@
+{
+  "ta": [
+    {
+      "file": "samples/ta/sample_0.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "நான் எதனா வந்துட்டு தப்பாக சொல்லியிருந்தா என்னை மன்னிச்சுடுங்க ஆனால் வந்துட்டு இனிமேல் யாரை கூப்பிட்டாலுமே கரெக்ட் டைமுக்கு போய் அவங்கள கொண்டு போய் விட்டுருங்க ஏன்னால் அவங்களுக்கு அதுவே வாழ்க்கையாக கூட அமையலாம் சரிங்களா அண்ணா ஓகே அண்ணா",
+      "duration_sec": 11.3,
+      "scenario": "Extempore",
+      "task_name": "Ola/Uber Prompts"
+    },
+    {
+      "file": "samples/ta/sample_1.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "வளர்ந்து வரும் உலகம்",
+      "duration_sec": 2.46,
+      "scenario": "Extempore",
+      "task_name": "KYP - Basic"
+    },
+    {
+      "file": "samples/ta/sample_2.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "நாளுக்கு நாள் உலகம் மாறிக்கிட்டு தான் இருக்குது என்னத்தை சொல்கிறது",
+      "duration_sec": 3.33,
+      "scenario": "Extempore",
+      "task_name": "KYP - Basic"
+    },
+    {
+      "file": "samples/ta/sample_3.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "மாறிக்கிட்டு தான் இருக்குது உலகம்",
+      "duration_sec": 1.22,
+      "scenario": "Extempore",
+      "task_name": "KYP - Basic"
+    },
+    {
+      "file": "samples/ta/sample_4.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "செய்தி தாள்களேயும் நியூஸ்களேயும்",
+      "duration_sec": 1.6,
+      "scenario": "Extempore",
+      "task_name": "KYP - Basic"
+    },
+    {
+      "file": "samples/ta/sample_5.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "உலகத்தையும் கொண்டு வந்துட்டான் எல்லாம் வந்து பார்த்திங்கனா அதில் தான் இருக்கிறோம் நம்ம உலகத்தை பார்த்திங்கனா அமெரிக்காவில் நடக்கிற நிகழ்ச்சியை மொபைலேயே நம்ம பார்த்துகிற மாதிரி வந்திடுச்சு",
+      "duration_sec": 8.8,
+      "scenario": "Extempore",
+      "task_name": "KYP - Basic"
+    },
+    {
+      "file": "samples/ta/sample_6.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "இன்னும் பத்து வருசத்தில் பார்த்திங்கனா இந்த உலகம்",
+      "duration_sec": 2.18,
+      "scenario": "Extempore",
+      "task_name": "KYP - Basic"
+    },
+    {
+      "file": "samples/ta/sample_7.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "ஆனால் அந்தளவுக்கு பார்த்திங்கனா அந்த நெட்டுனு சொல்கிறாங்கள இணையத்தளம் ஆ இணையத்தளம் வளர்ச்சி தொழில் நுட்பம் வளர்ச்சி இணையத்தளங்களின் வளர்ச்சி",
+      "duration_sec": 9.38,
+      "scenario": "Extempore",
+      "task_name": "KYP - Basic"
+    },
+    {
+      "file": "samples/ta/sample_8.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "நாளுக்கு நாள் பெருகிக் கொண்டு இருக்குது",
+      "duration_sec": 1.7,
+      "scenario": "Extempore",
+      "task_name": "KYP - Basic"
+    },
+    {
+      "file": "samples/ta/sample_9.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "மனுஷனும் புதுசு புதுசாக கண்டு பிடிச்சிட்டே இருக்கிறான்",
+      "duration_sec": 2.08,
+      "scenario": "Extempore",
+      "task_name": "KYP - Basic"
+    },
+    {
+      "file": "samples/ta/sample_10.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "அதற்கு தகுந்த மாதிரி தன்னை மாற்றிக் கொண்டுக்கிட்டு இருக்கிறான் வாழ்ந்துக் கிட்டு இருக்கிறான்",
+      "duration_sec": 4.48,
+      "scenario": "Extempore",
+      "task_name": "KYP - Basic"
+    },
+    {
+      "file": "samples/ta/sample_11.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "உலகம் எங்கேயோ போகுது மாறிக்கிட்டு இருக்குது",
+      "duration_sec": 2.66,
+      "scenario": "Extempore",
+      "task_name": "KYP - Basic"
+    },
+    {
+      "file": "samples/ta/sample_12.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "இந்த உலகம் வந்து",
+      "duration_sec": 1.02,
+      "scenario": "Extempore",
+      "task_name": "KYP - Basic"
+    },
+    {
+      "file": "samples/ta/sample_13.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "பிரம்மாண்டமானதுங்க",
+      "duration_sec": 1.02,
+      "scenario": "Extempore",
+      "task_name": "KYP - Basic"
+    },
+    {
+      "file": "samples/ta/sample_14.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "விசித்திரமானதுங்க",
+      "duration_sec": 1.12,
+      "scenario": "Extempore",
+      "task_name": "KYP - Basic"
+    },
+    {
+      "file": "samples/ta/sample_15.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "அவ்வளோ தான் இந்த உலகம்",
+      "duration_sec": 1.6,
+      "scenario": "Extempore",
+      "task_name": "KYP - Basic"
+    },
+    {
+      "file": "samples/ta/sample_16.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "தொலைநோக்கு பார்வைன்னு சொல்கிறோம்",
+      "duration_sec": 1.6,
+      "scenario": "Extempore",
+      "task_name": "KYP - Basic"
+    },
+    {
+      "file": "samples/ta/sample_17.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "நான் பயணிக்க மாட்டேன் வர மாட்டேன் அப்படின்னு சொல்லிக்கிட்டு இருந்திங்கனா இந்த உலகம் போகிற திசைலாம் நாம் போக முடியாது",
+      "duration_sec": 8.23,
+      "scenario": "Extempore",
+      "task_name": "KYP - Basic"
+    },
+    {
+      "file": "samples/ta/sample_18.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "பெரிய வட்டத்துக்குள்ளேயெலாம் இருக்காது",
+      "duration_sec": 1.41,
+      "scenario": "Extempore",
+      "task_name": "KYP - Basic"
+    },
+    {
+      "file": "samples/ta/sample_19.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "அமெரிக்காவில் விவசாயம்லாம் எப்படி பண்ணுறான்",
+      "duration_sec": 2.65,
+      "scenario": "Extempore",
+      "task_name": "KYP - Basic"
+    }
+  ],
+  "te": [
+    {
+      "file": "samples/te/sample_0.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "ఈయొక్క మూడు యాప్లను ఈయొక్క ప్రస్తుత కాలంలో చాలా ఎక్కువ మంది ఉపయోగిస్తున్నారు",
+      "duration_sec": 6.21,
+      "scenario": "Extempore",
+      "task_name": "GK Questions"
+    },
+    {
+      "file": "samples/te/sample_1.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "లేదంటే అక్కడ ఉన్న వాతావరణాన్ని దృశ్యాన్ని ఇక్కడి వారు చూడటానికి",
+      "duration_sec": 5.05,
+      "scenario": "Extempore",
+      "task_name": "GK Questions"
+    },
+    {
+      "file": "samples/te/sample_2.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "ఫోటో తీసి పంపడం వలన లేదంటే ఈయొక్క వీడియో కాల్ అనే ఆయొక్క ఉపయోగకరమైన కాన్ఫిడెన్స్ ద్వారా",
+      "duration_sec": 8.32,
+      "scenario": "Extempore",
+      "task_name": "GK Questions"
+    },
+    {
+      "file": "samples/te/sample_3.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "పెద్ద చిన్న ప్రతీ ఒక్కరు కూడా ఉపయోగిస్తున్నారు ఇకపోతే ఇన్స్టాగ్రామ్ అనేది ఒక పెద్ద సోషల్ మీడియా ఇందులో మన దేశం వాళ్ళే కాకుండా ఇతర దేశ వాళ్ళు కూడా",
+      "duration_sec": 14.85,
+      "scenario": "Extempore",
+      "task_name": "GK Questions"
+    },
+    {
+      "file": "samples/te/sample_4.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "చాలా మంది ఈ యొక్క ఇన్స్టాగ్రామ్ అనేది వాడుతూ ఉంటారు వాడి చేసే కార్యకలాపాలను ఇందులో పెట్టడం ద్వారా ప్రపంచమంతా చూడటానికి ఇవి ఆ యొక్క విధమైన",
+      "duration_sec": 12.35,
+      "scenario": "Extempore",
+      "task_name": "GK Questions"
+    },
+    {
+      "file": "samples/te/sample_5.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "ఈయొక్క అవకాశం అనేది ఉంటుంది అందుచేత ఈయొక్క ఇన్స్టాగ్రామ్ అనేది చిన్నల నుండి పెద్దల వరకు అందరు కూడా ఉపయోగిస్తున్నారు",
+      "duration_sec": 10.53,
+      "scenario": "Extempore",
+      "task_name": "GK Questions"
+    },
+    {
+      "file": "samples/te/sample_6.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "ఇకపోతే ఈయొక్క ఫోన్లో వల్ల ఉపయోగాలు ఏంటంటే ఏదైనా మనకి ఏ విషయమైనా తెలుసుకోక లేకపోతే",
+      "duration_sec": 8.8,
+      "scenario": "Extempore",
+      "task_name": "GK Questions"
+    },
+    {
+      "file": "samples/te/sample_7.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "తెలియకపోతే ఈయొక్క ఫోన్ ద్వారా ఈ యొక్క గూగుల్ అనే దాని ద్వారా మనము వెంటనే మన సమస్యకి కానీ",
+      "duration_sec": 9.28,
+      "scenario": "Extempore",
+      "task_name": "GK Questions"
+    },
+    {
+      "file": "samples/te/sample_8.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "తెలియని విషయానికి కానీ మనం చూస్తూ వెంటనే జవాబు అనేది పొందవచ్చు",
+      "duration_sec": 6.02,
+      "scenario": "Extempore",
+      "task_name": "GK Questions"
+    },
+    {
+      "file": "samples/te/sample_9.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "ఇకపోతే నష్టం ఏంటంటే ప్రస్తుతం ఉన్న చిన్న పిల్లలు కూడా ఈయొక్క ఫోన్కి బాగా అలవాటు పడి ఫోన్ మాయలో పడిపోతున్నారు",
+      "duration_sec": 9.66,
+      "scenario": "Extempore",
+      "task_name": "GK Questions"
+    },
+    {
+      "file": "samples/te/sample_10.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "ఇది వరకు ఆటలు ఆడాలన్నా ఏది ఆడాలన్నా ఈ యొక్క ప్రక్కనున్న ఖాళీ స్థలాలలో ఆడేవారు",
+      "duration_sec": 7.26,
+      "scenario": "Extempore",
+      "task_name": "GK Questions"
+    },
+    {
+      "file": "samples/te/sample_11.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "కాబట్టి వారు ఎంతో ఆరోగ్యంగా ఉండేవారు ఎండ గాలి బయట గాలి బాగా వారి ఒంటికి పట్టి",
+      "duration_sec": 7.17,
+      "scenario": "Extempore",
+      "task_name": "GK Questions"
+    },
+    {
+      "file": "samples/te/sample_12.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "ఎలా ఉన్నారంటే ఆయొక్క ఫోన్ మాయలో పడి ఈయొక్క ఇంట్లోనే కూర్చొని ఆ యొక్క ఫోన్లోనే తలపెట్టేసి చూస్తూ ఉన్నారు దాని ద్వారా ఎన్నో చూడరానివి కూడా చూస్తూ వారు చెడిపోతూ ఉన్నారు",
+      "duration_sec": 14.37,
+      "scenario": "Extempore",
+      "task_name": "GK Questions"
+    },
+    {
+      "file": "samples/te/sample_13.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "పొద్దుగాల లేత్తాం గుమ్మడి పూలు తెచ్చుకుంటాం కట్టే పూలు తెచ్చుకుంటాం గోరంట పూలు తెచ్చుకుంటాం",
+      "duration_sec": 5.63,
+      "scenario": "Extempore",
+      "task_name": "Coordinator Section"
+    },
+    {
+      "file": "samples/te/sample_14.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "వేసీ మళ్ళీ మాపటేల నాలుగు గంటలకి బతుకమ్మను పట్టుకొని ఊరిలోకి పోతాం ఊరిలో ఆడుకుంటాం ఆటలు పాటలాడుకోని మంచిగా ఏమన్నా పలారం వండకపోతే పెసరపప్పు గాని ఇంకా మొక్కకంకి గాని కొండపోయి ఆడ పలారం పంచి పెడతాము",
+      "duration_sec": 13.21,
+      "scenario": "Extempore",
+      "task_name": "Coordinator Section"
+    },
+    {
+      "file": "samples/te/sample_15.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "పలారం పంచిపెట్టి ఇగ మంచిగా సంబర పడుకుంటా ఎగురుకుంటా దుంకుకుంటూ వస్తాం చిన్నప్పుడు ఇప్పుడు కూడా పిల్లగాలు గట్టనే ఎత్తారు కానీ తొమ్మిది రోజులు ఆడతారు",
+      "duration_sec": 8.32,
+      "scenario": "Extempore",
+      "task_name": "Coordinator Section"
+    },
+    {
+      "file": "samples/te/sample_16.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "పదవనాడు అర్నెమ్ పదకొండవ రోజు దసరా దేవుడిని దుర్గ దేవుడిని",
+      "duration_sec": 6.59,
+      "scenario": "Extempore",
+      "task_name": "Coordinator Section"
+    },
+    {
+      "file": "samples/te/sample_17.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "అవతల ఎల్లనంపాలంటే మనం నీసు కవుసు తినకముందే ఎళ్ళనంపాలే కానీ నీసు కవుసు తినక ముందే దేవుడిని సాగదోలుతాం సాగదోలి ఇక వచ్చి మంచిగా యాటలు కోసుకొని తింటా ఉంటాం",
+      "duration_sec": 12.26,
+      "scenario": "Extempore",
+      "task_name": "Coordinator Section"
+    },
+    {
+      "file": "samples/te/sample_18.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "ఎనిమిది",
+      "duration_sec": 1.02,
+      "scenario": "Read",
+      "task_name": "Keywords Spotting"
+    },
+    {
+      "file": "samples/te/sample_19.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "అంటే వేడినీటితో కాపడం పెట్టి మర్దనా చేస్తూ ఉంటారు రెండు శీతల చికిత్స",
+      "duration_sec": 7.07,
+      "scenario": "Extempore",
+      "task_name": "Daily Life"
+    }
+  ],
+  "kn": [
+    {
+      "file": "samples/kn/sample_0.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "ಇಂಡಿಯಾ ಶ್ರೀಲಂಕಾ ನೇಪಾಲ್ ಬಾಂಗ್ಲಾದೇಶ್ ಆಫ್ಘಾನಿಸ್ತಾನ್",
+      "duration_sec": 5.82,
+      "scenario": "Extempore",
+      "task_name": "Task of Fives"
+    },
+    {
+      "file": "samples/kn/sample_1.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "ಉದ್ಯೋಗ ಹೊರ್ತುಪಡ್ಸಿ ನನಗೆ ಒಂದು ಹವ್ಯಾಸ ಎದ್ರಾಗ ಆಸಕ್ತಿ ಜಾಸ್ತಿ ಅದ ಅಂತಂದು ಹೇಳಿದ್ರೆ ಡಾನ್ಸ್ ಮಾಡೋದು",
+      "duration_sec": 6.69,
+      "scenario": "Extempore",
+      "task_name": "KYP - Basic"
+    },
+    {
+      "file": "samples/kn/sample_2.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "ನನಗೆ ಡಾನ್ಸ್ ಮಾಡೋದು ತೋಲು ಇಷ್ಟ ಇತ್ತು ಯಾಕಂತಂದು ಹೇಳದ್ರೆ ಓವ್ ಮನುಷ್ಯ ಯಾವಾಗ ಭಿ ಯಾಕೆ ಡಾನ್ಸ್ ಮಾಡ್ತಾನಂತಂದು ಹೇಳದ್ರೆ ಖುಷಿ ಕಡಿಂದು ಖುಷಿ ವ್ಯಕ್ತಪಡಿಸೋ ಕಡಿಂದು",
+      "duration_sec": 9.57,
+      "scenario": "Extempore",
+      "task_name": "KYP - Basic"
+    },
+    {
+      "file": "samples/kn/sample_3.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "ಒಂದು ವ್ಯಕ್ತಪಡಿಸುವ ಖುಷಿಯಿಂದ ಒಂದು ಎಲ್ಲರೂ ಸೇರಿ ಮಾಡುವಂಥದ್ದೇ ಡಾನ್ಸು",
+      "duration_sec": 6.69,
+      "scenario": "Extempore",
+      "task_name": "KYP - Basic"
+    },
+    {
+      "file": "samples/kn/sample_4.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "ಒಂದು ಹಾಡೋದಲ್ಲಿ ವ್ಯಕ್ತಪಡ್ಸ್ತಾನೆ ಅವ ಎಷ್ಟು ಒಂದು ನೊಂದ್ಕೊಂಡಾನ ಮನುಷ್ಯ ಅಂತಂತ ಹೇಳಿ ಹಿಂಗೆ ನಂಗೆ ಆಸಕ್ತಿಗಳು ಒಂದು ಹವ್ಯಾಸಗಳು ಯಾವುವು ಅಂತಂದು ಹೇಳದ್ರೆ",
+      "duration_sec": 8.51,
+      "scenario": "Extempore",
+      "task_name": "KYP - Basic"
+    },
+    {
+      "file": "samples/kn/sample_5.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "ಒಂದು ಡಾನ್ಸ್ ಮಾಡ್ತೆ ಖುಷಿಯಿಂದ ಒಂದು ಹಾಡು ಹಾಡ್ತೆ ಖುಷಿ ಡಾನ್ಸ್ ಮತ್ತ ಹಾಡು ಈ ಅಂಥವ್ ಎಂಥವು ಅಂದಂದ್ರೆ",
+      "duration_sec": 7.94,
+      "scenario": "Extempore",
+      "task_name": "KYP - Basic"
+    },
+    {
+      "file": "samples/kn/sample_6.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "ನಾವು ಯಾವ್ದು ಭಿ ಒಂದು ಮನುಷ್ಯಂದು ಹೆಂಗೆ ಒಂದು ಅಭ್ಯಾಸ ಇರ್ತದೆ ಅಂತಂದು ಹೇಳ್ದ್ರೆ ಎಲ್ಲ ಎಲ್ಲರ ಮುಂದೆ ಹೇಳ್ಕೊಳ್ಳಕಾಗಲ್ದ್ ಮನುಷ್ಯರು ಇವಾಗ ನಂಬಿಕೆ ಇರೋರು ಇದ್ದರೂ ಅವ್ರಿಗೆ ನಂಬ್ಲಿಕ್ ನಮ್ಗೆ ಸಾಧ್ಯ ಆಗ್ಲತಿಲ್ಲ ಯಾಕಂತಂದು ಹೇಳ್ದ್ರೆ ಅವ ಯಾವಾಗ ಮೋಸ ಮಾಡ್ತಾನೋ ಅವ ಯಾವಾಗ ನಮ್ಮಿಂದ ಏನಾದ್ರೂ",
+      "duration_sec": 17.76,
+      "scenario": "Extempore",
+      "task_name": "KYP - Basic"
+    },
+    {
+      "file": "samples/kn/sample_7.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "ಎಲ್ಲದಕ್ಕೆ ಒಂದು ಕಾರಣ ಇರ್ತಾವ ಆ ಕಾರಣ ಇಲ್ದೇ ಭಿ ನಾವು ಡಾನ್ಸ ಮಾಡ್ಬೌದು ನನ್ಗೆ ಡಾನ್ಸ್ ಮೇಲೆ ಜಾಸ್ತಿ ಇಂಟ್ರೆಸ್ಟ್ ಅದರ ಕಡಿಂದೆ ನನ್ನ ಡ್ಯಾನ್ಸಿಗೆ ಇನ್ಸ್ಪಿರೇಶನ್ ಮೈಕಲ್ ಜ್ಯಾಕ್ಸನ್ ಮೈಕಲ್ ಜ್ಯಾಕ್ಸನ್ ಅವರು ಎಷ್ಟು ಚಂದ ಡಾನ್ಸ್ ಮಾಡ್ತಿರನ್ತಂದು ಹೇಳಿ ನಾ ಮತ್ತೆ ಹೇಳಕ್ಕೆ",
+      "duration_sec": 14.56,
+      "scenario": "Extempore",
+      "task_name": "KYP - Basic"
+    },
+    {
+      "file": "samples/kn/sample_8.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "ಇದು ಆಗಲ್ದು ಅವ್ರು ನನ್ಗೆ ಇನ್ಸ್ಪಿರೇಶನ್ ಅರ ನಾಗ ಅವರೊಂದು ಒಂದು ರೋಲ್ ಮೋಡೆಲ್ ಗತ್ಲೆ ಅರ",
+      "duration_sec": 5.15,
+      "scenario": "Extempore",
+      "task_name": "KYP - Basic"
+    },
+    {
+      "file": "samples/kn/sample_9.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "ಅವರೆಷ್ಟು ಸುಂದರವಾಗಿ ಡಾನ್ಸ್ ಮಾಡ್ತಿದ್ದರು ಎಷ್ಟು ಚೆನ್ನಾಗಿ ಅವ್ರದ್ದು ಮೇಕಪ್ಪು ಅವ್ರದ್ದು ಡ್ರೆಸ್ಸಿಂಗ್ ಸೆನ್ಸು ಅವೆಲ್ಲ ಎಷ್ಟು ಸುಂದರವಾಗಿ ಅವರು",
+      "duration_sec": 7.84,
+      "scenario": "Extempore",
+      "task_name": "KYP - Basic"
+    },
+    {
+      "file": "samples/kn/sample_10.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "ಉಡುಪುಗಳಿಟ್ಕೋತಿರಂತಂದೇಳಿ ಎಲ್ಲರಿಗೊತ್ತದ ನಮಗದು ಇನ್ಟ್ರೆಷ್ಟು ಅವ್ರದ್ದು ನೋಡಿ ನಮಗೂ ಬಂದಿದ್ದು ನಾವು ಡಾನ್ಸ್ ಮಾಡಬೇಕು ನಾವು ಒಂದು",
+      "duration_sec": 9.18,
+      "scenario": "Extempore",
+      "task_name": "KYP - Basic"
+    },
+    {
+      "file": "samples/kn/sample_11.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "ಅವ್ರು ಹಾಡೊ ಅಂಥ ಒಂದು ಸುಂದರವಾದಂಥ ಹಾಡುಗಳು ಎಷ್ಟು ಮೃದುವಾಗಿ ಒಂದು",
+      "duration_sec": 8.05,
+      "scenario": "Extempore",
+      "task_name": "KYP - Basic"
+    },
+    {
+      "file": "samples/kn/sample_12.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "ತಣ್ಣನೆ ಅಥವಾ ಎಂಥಾ ಮನುಷ್ಯ ಎಷ್ಟೇ ದುಃಖದಲ್ಲಿರುವ ಮನುಷ್ಯನಿಗೂ ಒಂದು ಹಾಡಿನಿಂದ ಹೊರತರುವಂಥ ಒಂದು",
+      "duration_sec": 7.84,
+      "scenario": "Extempore",
+      "task_name": "KYP - Basic"
+    },
+    {
+      "file": "samples/kn/sample_13.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "ಅದು ಮನಸ್ಥಿತಿ ನಮ್ಮೊಳಗೆ ಇರ್ತವೆ ನಾವು ಹವ್ಯಾಸಗಳ ಮೂಲಕ ವ್ಯಕ್ತಪಡಿಸ್ಬೌದು ಅದು ನಂಗೆ ಹವ್ಯಾಸಗಳು ಬಿಟ್ಟು ತುಂಬ ಜಾಸ್ತಿ ಹವ್ಯಾಸಗಳು ನಾವು ನಾವು ಬರಿಯೋದು ಓದೋದು ಅವೆಲ್ಲ ಜಾಸ್ತಿನೇ ಅವ ನಾವು ಏನ್ದ್ರಾವ ಸುಮ್ಮನೆ ಕುಂತಾಗ",
+      "duration_sec": 14.08,
+      "scenario": "Extempore",
+      "task_name": "KYP - Basic"
+    },
+    {
+      "file": "samples/kn/sample_14.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "ಏನಾದ್ರೂ ಬರಿತಾ ಇರ್ತೀವಿ ಏನರ ಓದ್ತಾ ಇರ್ತೀವಿ ನಮಗೆ ಅರ್ಥ ಆಗ್ದಿಂದು ಹೇಳ್ತಾ ಇರ್ತೀವಿ ಹೀಗೆಲ್ಲ ನಮ್ಗೆ",
+      "duration_sec": 6.3,
+      "scenario": "Extempore",
+      "task_name": "KYP - Basic"
+    },
+    {
+      "file": "samples/kn/sample_15.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "ಏನೇನು ನಮಗೊಂದೈವತ್ತು ಜನಕ್ಕೆ ಬೇಕಾಗುತ್ತೆ ಏನೇನೇಳಿದ್ರೆ ಎಲ್ಲಾ ಕೊಡ್ತೀರಾ",
+      "duration_sec": 5.06,
+      "scenario": "Extempore",
+      "task_name": "Swiggy Prompts"
+    },
+    {
+      "file": "samples/kn/sample_16.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "ಹಪ್ಪಳಾ ಸಂಡಿಗೆ ಕೊಡಿ",
+      "duration_sec": 1.31,
+      "scenario": "Extempore",
+      "task_name": "Swiggy Prompts"
+    },
+    {
+      "file": "samples/kn/sample_17.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "ಫೋನ್ಪೇ ಮಾಡಬೇಕಾ ಇಲ್ಲ ಕ್ಯಾಶ್ ಕೊಡೋದಾ",
+      "duration_sec": 2.27,
+      "scenario": "Extempore",
+      "task_name": "Swiggy Prompts"
+    },
+    {
+      "file": "samples/kn/sample_18.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "ಭಾರತದ ನರ್ತಕರ ಮೇಲೆ ಬಾಲಿವುಡ್ ಎಷ್ಟರ ಮಟ್ಟಿಗೆ ಪ್ರಭಾವ ಬೀರುತ್ತದೆ ಅಂದರೆ ಜಾಸ್ತಿ ಬೀರ್ತಿದೆ ಮತ್ತು ಅವ್ರನ್ನು ನೋಡಿ ನಾವು ಅವ್ರ ಥರ ಫರ್ಫಾರ್ಮೆನ್ಸ್ ಮಾಡಬೇಕು ಅನ್ನೋದು ಒಂತರಾ",
+      "duration_sec": 10.43,
+      "scenario": "Extempore",
+      "task_name": "KYP - Dancing"
+    },
+    {
+      "file": "samples/kn/sample_19.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "ಚಾಲೆಂಜ್ ಥರ ಬರುತ್ತದೆ ಬರ್ತದೆ ಎಲ್ರೂ ಇಷ್ಟಪಡುವಂತಹ ಕೆಲವು ನಿತ್ಯ ನೂತನ ನೃತ್ಯಗಳಲ್ಲು ಯಾವುಯಾವು ಅಂದರೆ",
+      "duration_sec": 6.59,
+      "scenario": "Extempore",
+      "task_name": "KYP - Dancing"
+    }
+  ],
+  "ml": [
+    {
+      "file": "samples/ml/sample_0.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "ഗുണഭോക്താവിൻ്റെ പേര് ദാസപ്പൻ വാര്യർ മൊബൈൽ നമ്പർ അറുപത്തൊന്ന് നാല്പത്തിയൊന്ന് നാല്പത്തിയെഴ് നാല്പത്തി ഒൻപത് എൺപത്തഞ്ച് ഒൻപത് എന്നിവയ്ക്കായുള്ള വാക്സിൻ സർട്ടിഫിക്കറ്റ് ഡൗൺലോഡ് ചെയ്യാമോ",
+      "duration_sec": 10.25,
+      "scenario": "Read",
+      "task_name": "Umang Commands"
+    },
+    {
+      "file": "samples/ml/sample_1.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "നമ്മുടെ ഒഴിവു സമയങ്ങളിൽ നമ്മള് ഓരോ കളികളിൽ ഏർപ്പെടുന്നതുകൊണ്ടുതന്നെ നമുക്ക് അതിനോടുള്ളൊരു ഒരു",
+      "duration_sec": 7.47,
+      "scenario": "Extempore",
+      "task_name": "KYP - Games"
+    },
+    {
+      "file": "samples/ml/sample_2.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "ഇഷ്ടവും അതുപോലെ നമ്മുടെ ഒഴിവു സമയത്ത് നമ്മൾ മറ്റ് മറ്റു പല പ്രശനങ്ങൾ അല്ലെങ്കിൽ എന്തെങ്കിലും ഒരു പ്രശ്നത്തിൽ നമ്മള്",
+      "duration_sec": 7.55,
+      "scenario": "Extempore",
+      "task_name": "KYP - Games"
+    },
+    {
+      "file": "samples/ml/sample_3.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "വീർപ്പുമുട്ടൽ അനുഭവിക്കുന്നുണ്ടെങ്കിൽ അല്ലെങ്കിൽ ഇപ്പം നമുക്ക് മാനസികമായി നമ്മൾ വീക്കാണെങ്കിൽ ഓരോ കളികളിൽ ഏർപ്പെടുമ്പോളും നമുക്ക് ആ മാനസികമായ ഒരവസ്ഥയിൽ നിന്നും നമ്മള് ഒന്നും കൂടെ മുന്നോട്ട് പോവുകയാണ് ചെയ്യുന്നത്",
+      "duration_sec": 11.97,
+      "scenario": "Extempore",
+      "task_name": "KYP - Games"
+    },
+    {
+      "file": "samples/ml/sample_4.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "ഇപ്പോൾ നമുക്കെന്തെങ്കിലും ഒരു സങ്കടമോ അല്ലെങ്കിൽ എന്തെങ്കിലൊരു എന്തെങ്കിലൊരു പ്രശ്നം നമ്മൾ നേരിടുന്നുണ്ടെങ്കിൽ നമുക്കത് മാനസികമായി",
+      "duration_sec": 6.5,
+      "scenario": "Extempore",
+      "task_name": "KYP - Games"
+    },
+    {
+      "file": "samples/ml/sample_5.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "ഒരുപാട് ബുദ്ധിമുട്ടുകളുണ്ടാക്കും എന്നാൽ ഓരോ കളി ഇപ്പോൾ ഷട്ടിൽ ആണെങ്കിലും ഫുട്ബോൾ അല്ലെങ്കിലൊരു",
+      "duration_sec": 5.63,
+      "scenario": "Extempore",
+      "task_name": "KYP - Games"
+    },
+    {
+      "file": "samples/ml/sample_6.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "പഠിക്കാൻ ഒക്കെ ആയിരിക്കും താല്പര്യപ്പെടുന്നത് ചിലവർ അതേപോലെ ഡിഗ്രി പഠിക്കും ചിലവർ എഞ്ചിനീയറിംഗ് പഠിക്കും ചിലവർ എം ബി ബി എസിന് പോകും പിന്നെ എം ബി ബി എസിന് ഒക്കെ പോകണെമെങ്കിൽ അത്യാവശ്യം ക്യാഷ് വേണം അതേപോലെ അത്യാവശ്യം മൈൻഡ് അതായത് നമുക്ക് പഠിക്കണം എന്നുള്ള ലക്ഷ്യത്തോടെ മാത്രം നമ്മൾ പോവണം ചിലവർ സി എ പഠിക്കാൻ പോകും",
+      "duration_sec": 14.02,
+      "scenario": "Extempore",
+      "task_name": "DOI - Education"
+    },
+    {
+      "file": "samples/ml/sample_7.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "പ്രകൃതിയോട് ഇണങ്ങിച്ചേർന്ന പ്രകൃതിയ്ക്ക് ഒരു വനം ഒരു",
+      "duration_sec": 3.64,
+      "scenario": "Extempore",
+      "task_name": "GK Questions"
+    },
+    {
+      "file": "samples/ml/sample_8.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "അവരിപ്പോൾ വീട്ടിൽ നിന്ന് ഇറങ്ങുമ്പോൾ പോലും അവർക്ക് വലിയ സേഫ്റ്റിയും കാര്യങ്ങളോ ഒന്നും ഇല്ല അപ്പോൾ സ്ത്രീകൾക്ക് കൂടുതലായിട്ടും സുരക്ഷിതത്വം ആണ് വേണ്ടത് അവർക്കെന്ന് പറഞ്ഞ് കഴിഞ്ഞാല്",
+      "duration_sec": 8.31,
+      "scenario": "Extempore",
+      "task_name": "GK Questions"
+    },
+    {
+      "file": "samples/ml/sample_9.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "ആണുങ്ങള് ജീവിക്കണ്ട അങ്ങനത്തെ കാര്യങ്ങളൊക്കെ പക്ഷെ ഇപ്പം അങ്ങനെയല്ല ഇപ്പം നേരെ എന്താ പറയുക ഇപ്പം പെൺ പെൺകുട്ടികളും ജോലിക്കൊക്കെ പോയി സമ്പാദിക്കുക അങ്ങനത്തെ കാര്യങ്ങളക്കെ ചെയ്യുന്നുണ്ട്",
+      "duration_sec": 9.01,
+      "scenario": "Extempore",
+      "task_name": "GK Questions"
+    },
+    {
+      "file": "samples/ml/sample_10.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "പുരുഷന്മാരുടെ ഒപ്പം ആ ഒപ്പം വേതനം വാങ്ങുന്ന സ്ത്രീകളും ഉണ്ട് പക്ഷേ ആ സിസ്റ്റത്തിൽ ഒര് മാറ്റോം വന്നിട്ടില്ല",
+      "duration_sec": 6.56,
+      "scenario": "Extempore",
+      "task_name": "DOI - Culture"
+    },
+    {
+      "file": "samples/ml/sample_11.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "മൺചെടികളും അതുപോലത്തന്നെ ഹോം ഡെക്കേഴ്സ് ചെടികൾ അപ്പോൾ വള്ളിച്ചെടികളും വരുന്നുന്നുണ്ട് എന്നുണ്ടെങ്കിൽ അല്ലാതെയും വരുന്നതായിട്ട് നമുക്ക് കാണാം പ്ലാസ്റ്റിക്ക് ചെടികളെക്കാളും ബെനിഫിറ്റ്സും കാര്യങ്ങളും തരുന്ന ഒന്നാണ്",
+      "duration_sec": 12.05,
+      "scenario": "Extempore",
+      "task_name": "KYP - Gardening"
+    },
+    {
+      "file": "samples/ml/sample_12.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "പണ്ടത്തേക്കാളും ഹോം ഡെക്കേഴ്സ് ആയിട്ടിപ്പോൾ യൂസ് ചെയ്യുന്നത് പുതിയ പുതിയ ചെടികൾ പുതിയ പുതിയ സംരംഭങ്ങൾ ഒക്കെയാണ് നമുക്ക് കാണാൻ പറ്റുന്നത്",
+      "duration_sec": 8.89,
+      "scenario": "Extempore",
+      "task_name": "KYP - Gardening"
+    },
+    {
+      "file": "samples/ml/sample_13.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "ചെടികൾക്കായിട്ട് ഓരോ സംരംഭങ്ങൾ നമ്മൾ കേൾക്കുന്നുണ്ട് പഞ്ചായത്തിലായിക്കോട്ടെ അല്ലാണ്ടായിക്കോട്ടെ പിന്നെ വേറൊരു നാഷൺസിൽ നിന്ന് ചെടികളിങ്ങോട്ടേക്ക് സ്റ്റെയ്റ്റ്സ് നമ്മുടെ സ്റ്റെയ്റ്റിലേക്ക്",
+      "duration_sec": 9.57,
+      "scenario": "Extempore",
+      "task_name": "KYP - Gardening"
+    },
+    {
+      "file": "samples/ml/sample_14.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "ഒരാൾക്ക് പിന്നെ ഇരുപത്തെട്ട് വയസുമായി അപ്പം ആദ്യകാലത്തൊക്കെ എന്നുവെച്ചാൽ ചെറുപ്പത്തിലൊക്കെ എന്നു വെച്ചിട്ടുണ്ടെങ്കിൽ മലയാളം ആണല്ലോ ആദ്യം വായിക്കുമ്പം ആദ്യമൊക്കെ അന്നത്തെക്കാലത്തൊക്കെ എൻ്റെ വീട്ടിൽ പത്രം ഒക്കെ വരുത്തുവായിരുന്നു അതായത് ദേശാഭിമാനി അങ്ങനെയുള്ളതൊക്കെ അപ്പോഴെന്ന് വെച്ചിട്ടുണ്ടെങ്കിൽ അവർക്ക് മെയ് വലിയ മെയിൻ ഹെഡിങ്ങുകളൊക്കെ വായിച്ച് കൊടുക്കും അതായത് ഇങ്ങനെ അവരുടെ വിരൽ തൊട്ട് വെച്ച് ഇങ്ങനെ ഓരോന്ന് ഓരോന്ന് വായിക്കും",
+      "duration_sec": 17.92,
+      "scenario": "Extempore",
+      "task_name": "DOI - News Media"
+    },
+    {
+      "file": "samples/ml/sample_15.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "അങ്ങനത്തെ പ്രശ്നമുണ്ട് അല്ലാണ്ട് വേറെ കുഴപ്പമൊന്നുല്ല പിന്നെ പിന്നെ അവർ അപ്പം വായിച്ച് വായിച്ച് തരാൻ തുടങ്ങി",
+      "duration_sec": 4.76,
+      "scenario": "Extempore",
+      "task_name": "DOI - News Media"
+    },
+    {
+      "file": "samples/ml/sample_16.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "നവജാത ശിശുക്കൾക്ക് വൃത്തിഹീനിയം വൃത്തിഹീനമായ സ്ഥലങ്ങൾ എന്നൊക്കെ പറഞ്ഞു കഴിഞ്ഞാൽ",
+      "duration_sec": 4.81,
+      "scenario": "Extempore",
+      "task_name": "Daily Life"
+    },
+    {
+      "file": "samples/ml/sample_17.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "എടുത്ത് എടുക്കുന്നത് കൊണ്ടും ചില ചിലപ്പം അസുഖങ്ങളൊക്കെ പകരാൻ സാധ്യതയുണ്ട് അപ്പോൾ അവർക്കെന്തെങ്കിലും അസുഖങ്ങളൊക്കെ വന്നു കഴിഞ്ഞാൽ പിന്നെ പോകാനൊക്കെ ഭയങ്കര ബുദ്ധിമുട്ടാണ് പിന്നെ എന്ന് പറഞ്ഞുകഴിഞ്ഞാൽ നമ്മുടെ എപ്പോഴും നമ്മൾ",
+      "duration_sec": 11.54,
+      "scenario": "Extempore",
+      "task_name": "Daily Life"
+    },
+    {
+      "file": "samples/ml/sample_18.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "പല കാലാവസ്ഥയിലും നമുക്ക് ചെയ്യാന് പറ്റുന്നൊരു കൃഷിരീതി കൃഷികളാണ് നെല്ല് വാഴ ഇഞ്ചി ചേന മുതലായവ",
+      "duration_sec": 9.18,
+      "scenario": "Extempore",
+      "task_name": "DOI - Agriculture"
+    },
+    {
+      "file": "samples/ml/sample_19.wav",
+      "sampling_rate": 48000,
+      "ground_truth": "ഒരുവിധം എല്ലാ കാലവസ്ഥയിലും ചെയ്തു കഴിഞ്ഞാല് വിജയകരമായി നമുക്ക് വിളകള്",
+      "duration_sec": 7.02,
+      "scenario": "Extempore",
+      "task_name": "DOI - Agriculture"
+    }
+  ]
+}

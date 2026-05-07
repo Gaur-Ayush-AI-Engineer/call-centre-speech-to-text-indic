@@ -5,3 +5,9 @@ torchcodec
 soundfile
 librosa
 numpy
+noisereduce
+python-dotenv
+jiwer
+openpyxl
+streamlit
+pandas
