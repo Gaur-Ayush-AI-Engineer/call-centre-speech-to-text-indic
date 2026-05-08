@@ -4,11 +4,12 @@ import tempfile
 import requests
 import numpy as np
 import soundfile as sf
-import librosa
 from openai import OpenAI
-from jiwer import wer
+from jiwer import wer, cer, Compose, ToLowerCase, RemovePunctuation, Strip
 from dotenv import load_dotenv
 from preprocessing import preprocess
+from telephony_sim import simulate_telephony
+import indic_conformer
 
 load_dotenv()
 
@@ -21,10 +22,9 @@ RESULTS_PATH = "results.json"
 # ============================================
 
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
-HF_TOKEN = os.getenv("HF_TOKEN")
 SARVAM_API_KEY = os.getenv("SARVAM_API_KEY")
 
-TELEPHONY_SAMPLE_RATE = 8000   # 8kHz to simulate telephone/VoIP audio
+TELEPHONY_SAMPLE_RATE = 8000
 
 LANGUAGES = {
     "ta": "Tamil",
@@ -39,15 +39,19 @@ groq_client = OpenAI(
 )
 
 # ============================================
-# TELEPHONY SIMULATION
+# TEXT NORMALIZATION FOR FAIR SCORING
 # ============================================
 
-def simulate_telephony(array: np.ndarray, orig_sr: int) -> tuple:
-    resampled = librosa.resample(array.astype(np.float32), orig_sr=orig_sr, target_sr=TELEPHONY_SAMPLE_RATE)
-    return resampled, TELEPHONY_SAMPLE_RATE
+_text_transform = Compose([ToLowerCase(), RemovePunctuation(), Strip()])
+
+def compute_scores(reference: str, hypothesis: str) -> tuple[float, float]:
+    """Return (WER, CER) after normalizing both strings."""
+    ref = _text_transform(reference)
+    hyp = _text_transform(hypothesis)
+    return round(wer(ref, hyp), 4), round(cer(ref, hyp), 4)
 
 # ============================================
-# STT: WHISPER VIA GROQ
+# STT: WHISPER VIA GROQ API
 # ============================================
 
 def transcribe_whisper(array: np.ndarray, sample_rate: int, lang_code: str) -> str:
@@ -70,8 +74,8 @@ def transcribe_whisper(array: np.ndarray, sample_rate: int, lang_code: str) -> s
 # ============================================
 
 def transcribe_sarvam(array: np.ndarray, sample_rate: int) -> str:
-    if SARVAM_API_KEY == "YOUR_SARVAM_API_KEY_HERE":
-        return "[SARVAM PLACEHOLDER — API key not set]"
+    if not SARVAM_API_KEY:
+        return "[SARVAM — API key not set]"
 
     with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as f:
         temp_path = f.name
@@ -82,7 +86,8 @@ def transcribe_sarvam(array: np.ndarray, sample_rate: int) -> str:
                 "https://api.sarvam.ai/speech-to-text",
                 headers={"api-subscription-key": SARVAM_API_KEY},
                 files={"file": ("audio.wav", audio_file, "audio/wav")},
-                data={"model": "saaras:v3", "mode": "transcribe"}
+                data={"model": "saaras:v3", "mode": "transcribe"},
+                timeout=30,
             )
         response.raise_for_status()
         return response.json().get("transcript", "").strip()
@@ -90,7 +95,7 @@ def transcribe_sarvam(array: np.ndarray, sample_rate: int) -> str:
         os.unlink(temp_path)
 
 # ============================================
-# EVALUATION LOOP — runs for a given audio mode
+# EVALUATION LOOP
 # ============================================
 
 def run_evaluation(metadata: dict, use_telephony: bool) -> dict:
@@ -99,12 +104,16 @@ def run_evaluation(metadata: dict, use_telephony: bool) -> dict:
 
     for lang_code, lang_name in LANGUAGES.items():
 
-        print("\n" + "=" * 65)
+        print("\n" + "=" * 70)
         print(f"LANGUAGE : {lang_name} ({lang_code})")
         print(f"MODE     : {'Telephony simulation (8kHz)' if use_telephony else 'Original quality (48kHz)'}")
-        print("=" * 65)
+        print("=" * 70)
 
-        results[lang_code] = {"whisper": [], "sarvam": []}
+        results[lang_code] = {
+            "whisper":         {"wer": [], "cer": []},
+            "sarvam":          {"wer": [], "cer": []},
+            "indic_conformer": {"wer": [], "cer": []},
+        }
 
         samples = metadata.get(lang_code, [])
         if not samples:
@@ -114,7 +123,7 @@ def run_evaluation(metadata: dict, use_telephony: bool) -> dict:
         for i, sample in enumerate(samples):
 
             print(f"\n  Sample {i + 1}/{len(samples)}")
-            print("  " + "-" * 50)
+            print("  " + "-" * 55)
 
             ground_truth = sample["ground_truth"]
             print(f"  GROUND TRUTH : {ground_truth}")
@@ -129,29 +138,47 @@ def run_evaluation(metadata: dict, use_telephony: bool) -> dict:
 
             audio = preprocess(audio, sr)
 
-            # Whisper
+            # --- Whisper ---
             try:
                 whisper_text = transcribe_whisper(audio, sr, lang_code)
-                whisper_wer = round(wer(ground_truth, whisper_text), 4)
+                w_wer, w_cer = compute_scores(ground_truth, whisper_text)
             except Exception as e:
                 whisper_text = f"[ERROR: {e}]"
-                whisper_wer = None
+                w_wer = w_cer = None
 
-            print(f"  WHISPER : {whisper_text}  (WER: {whisper_wer})")
-            if whisper_wer is not None:
-                results[lang_code]["whisper"].append(whisper_wer)
+            print(f"  WHISPER          : {whisper_text}")
+            if w_wer is not None:
+                print(f"                     WER={w_wer}  CER={w_cer}")
+                results[lang_code]["whisper"]["wer"].append(w_wer)
+                results[lang_code]["whisper"]["cer"].append(w_cer)
 
-            # Sarvam
+            # --- Sarvam ---
             try:
                 sarvam_text = transcribe_sarvam(audio, sr)
-                sarvam_wer = round(wer(ground_truth, sarvam_text), 4) if "PLACEHOLDER" not in sarvam_text else None
+                s_wer, s_cer = compute_scores(ground_truth, sarvam_text) if "API key" not in sarvam_text else (None, None)
             except Exception as e:
                 sarvam_text = f"[ERROR: {e}]"
-                sarvam_wer = None
+                s_wer = s_cer = None
 
-            print(f"  SARVAM  : {sarvam_text}" + (f"  (WER: {sarvam_wer})" if sarvam_wer is not None else ""))
-            if sarvam_wer is not None:
-                results[lang_code]["sarvam"].append(sarvam_wer)
+            print(f"  SARVAM           : {sarvam_text}")
+            if s_wer is not None:
+                print(f"                     WER={s_wer}  CER={s_cer}")
+                results[lang_code]["sarvam"]["wer"].append(s_wer)
+                results[lang_code]["sarvam"]["cer"].append(s_cer)
+
+            # --- IndicConformer ---
+            try:
+                indic_text = indic_conformer.transcribe(audio, sr, lang_code)
+                i_wer, i_cer = compute_scores(ground_truth, indic_text)
+            except Exception as e:
+                indic_text = f"[ERROR: {e}]"
+                i_wer = i_cer = None
+
+            print(f"  INDIC CONFORMER  : {indic_text}")
+            if i_wer is not None:
+                print(f"                     WER={i_wer}  CER={i_cer}")
+                results[lang_code]["indic_conformer"]["wer"].append(i_wer)
+                results[lang_code]["indic_conformer"]["cer"].append(i_cer)
 
     return {mode_label: results}
 
@@ -167,14 +194,14 @@ if not os.path.exists(METADATA_PATH):
 with open(METADATA_PATH, "r", encoding="utf-8") as f:
     metadata = json.load(f)
 
-print("\n" + "#" * 65)
+print("\n" + "#" * 70)
 print("PASS 1 — TELEPHONY SIMULATION (8kHz)")
-print("#" * 65)
+print("#" * 70)
 telephony_results = run_evaluation(metadata, use_telephony=True)
 
-print("\n" + "#" * 65)
+print("\n" + "#" * 70)
 print("PASS 2 — ORIGINAL AUDIO QUALITY (48kHz)")
-print("#" * 65)
+print("#" * 70)
 original_results = run_evaluation(metadata, use_telephony=False)
 
 # ============================================
@@ -198,19 +225,31 @@ def avg(scores):
 tel = telephony_results["telephony_8kHz"]
 ori = original_results["original_48kHz"]
 
-print("\n\n" + "=" * 85)
-print("RESULTS SUMMARY — Average WER per Language  (lower is better)")
-print("=" * 85)
-print(f"{'Language':<12} {'Whisper 8kHz':>14} {'Sarvam 8kHz':>13} {'Whisper 48kHz':>15} {'Sarvam 48kHz':>14}")
-print("-" * 75)
+MODELS = [
+    ("whisper",         "Whisper"),
+    ("sarvam",          "Sarvam"),
+    ("indic_conformer", "IndicConformer"),
+]
 
-for lang_code, lang_name in LANGUAGES.items():
-    w_tel = avg(tel.get(lang_code, {}).get("whisper", []))
-    s_tel = avg(tel.get(lang_code, {}).get("sarvam", []))
-    w_ori = avg(ori.get(lang_code, {}).get("whisper", []))
-    s_ori = avg(ori.get(lang_code, {}).get("sarvam", []))
-    print(f"{lang_name:<12} {w_tel:>14} {s_tel:>13} {w_ori:>15} {s_ori:>14}")
+for mode_label, mode_data in [("TELEPHONY 8kHz", tel), ("ORIGINAL 48kHz", ori)]:
+    print(f"\n\n{'=' * 90}")
+    print(f"RESULTS — {mode_label}   (WER / CER, lower is better)")
+    print(f"{'=' * 90}")
+    print(f"{'Language':<12}", end="")
+    for _, label in MODELS:
+        print(f"  {label + ' WER':>18} {label + ' CER':>18}", end="")
+    print()
+    print("-" * 90)
 
-print("=" * 85)
+    for lang_code, lang_name in LANGUAGES.items():
+        print(f"{lang_name:<12}", end="")
+        for key, _ in MODELS:
+            w = avg(mode_data.get(lang_code, {}).get(key, {}).get("wer", []))
+            c = avg(mode_data.get(lang_code, {}).get(key, {}).get("cer", []))
+            print(f"  {w:>18} {c:>18}", end="")
+        print()
+
+    print("=" * 90)
+
 print("\nNOTE: 8kHz = telephony simulation | 48kHz = original recording quality")
-print("Code-switching (Tanglish/Tenglish etc.) not covered — known gap for call centers.")
+print("WER > 1.0 means the model hallucinated more words than were in the original audio.")

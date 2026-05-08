@@ -11,3 +11,8 @@ jiwer
 openpyxl
 streamlit
 pandas
+pyannote.audio
+transformers
+accelerate
+onnxruntime==1.20.1
+onnx==1.20.1

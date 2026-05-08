@@ -1,1 +1,5 @@
+Resemblyzer/
+__pycache__/
+*.pyc
 .env
+test_diar_30s.wav
