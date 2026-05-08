@@ -23,13 +23,14 @@ Used `ai4bharat/indicvoices_r` — speech dataset by AI4Bharat (IIT Madras), cov
 Note: IndicVoices-R is a prompted recording corpus processed with speech enhancement — it is near-studio quality, not real call recordings. WER numbers will be better than production call audio.
 
 ### 2. Telephony Simulation
-Audio goes through a three-stage telephony simulation (`telephony_sim.py`) before transcription:
+Audio goes through a four-stage telephony simulation (`pipeline/telephony_sim.py`) before transcription:
 - **8kHz resampling** — narrows bandwidth to match telephone audio
+- **Bandpass filter 300–3400 Hz** — removes sub-300Hz rumble and above-3400Hz content that PSTN lines do not transmit
 - **G.711 mu-law codec** — applies the quantization distortion real phone calls have (encode → decode round-trip)
 - **VoIP packet loss** — randomly zeros out 20ms chunks at 2% probability, simulating dropped network packets
 
 ### 3. Audio Preprocessing
-A dedicated preprocessing pipeline (`preprocessing.py`) runs after telephony simulation:
+A dedicated preprocessing pipeline (`pipeline/preprocessing.py`) runs after telephony simulation:
 - **Silence trimming** — removes dead air from start and end
 - **Noise reduction** — suppresses background noise and static
 - **Voice Activity Detection (VAD)** — keeps only speech segments using Silero VAD (neural network, far more robust than energy-threshold VAD)
@@ -92,16 +93,18 @@ Evaluated on 20 samples per language under telephony simulation (8kHz + G.711 + 
 ## Project Structure
 
 ```
-├── app.py                  # Streamlit web app — transcribe, diarize, compare results
-├── poc_call_centre_stt.py  # Evaluation script — compares 3 models with WER + CER
-├── preprocessing.py        # Audio preprocessing pipeline (Silero VAD, noise reduction, normalization)
-├── telephony_sim.py        # Telephony simulation (8kHz resample + G.711 codec + packet loss)
-├── indic_conformer.py      # IndicConformer-600M model loading and transcription
-├── download_samples.py     # Downloads 20 samples per language from indicvoices_r locally
-├── inspect_dataset.py      # Dataset inspection utility
-├── results.json            # Saved evaluation results (WER + CER for all 3 models)
-├── samples/                # Local audio samples (not committed)
-├── .env                    # API keys (not committed)
+├── app.py                        # Streamlit web app — transcribe, diarize, compare results
+├── poc_call_centre_stt.py        # Evaluation script — compares 3 models with WER + CER
+├── pipeline/
+│   ├── telephony_sim.py          # Telephony simulation (8kHz + bandpass + G.711 + packet loss)
+│   ├── preprocessing.py          # Audio preprocessing (Silero VAD, noise reduction, normalization)
+│   └── indic_conformer.py        # IndicConformer-600M model loading and transcription
+├── scripts/
+│   ├── download_samples.py       # Downloads 20 samples per language from indicvoices_r
+│   └── inspect_dataset.py        # Dataset inspection utility
+├── results.json                  # Saved evaluation results (WER + CER for all 3 models)
+├── samples/                      # Local audio samples (not committed)
+├── .env                          # API keys (not committed)
 └── requirements.txt
 ```
 
@@ -148,5 +151,3 @@ streamlit run app.py
 - **Code-switching not evaluated** — Tanglish/Tenglish mixed speech is common in call centres but not in the dataset.
 - **Single speaker per sample** — real calls have two speakers with potential overlap. The diarization tab addresses this for the app demo but the eval script does not.
 - **IndicConformer data overlap** — AI4Bharat built both `indicvoices_r` and IndicConformer. The model may have been trained on this dataset, making its eval scores optimistic.
-- **Bandpass filter missing** — PSTN telephony transmits 300–3400 Hz. A bandpass filter would more accurately simulate production conditions.
-- **No latency measurement** — transcription latency per second of audio is not captured anywhere.
