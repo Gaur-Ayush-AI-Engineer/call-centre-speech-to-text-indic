@@ -1,10 +1,24 @@
 import numpy as np
 import librosa
+from scipy.signal import butter, sosfilt
 
 TELEPHONY_SAMPLE_RATE = 8000
 MU = 255          # G.711 mu-law constant
 PACKET_LOSS_RATE = 0.02   # 2% of 20ms chunks get dropped (realistic VoIP)
 PACKET_MS = 20            # standard VoIP packet size
+
+# ============================================
+# PSTN BANDPASS FILTER (300–3400 Hz)
+# ============================================
+
+def apply_bandpass(array: np.ndarray, sr: int) -> np.ndarray:
+    """
+    PSTN telephone lines transmit only 300–3400 Hz.
+    Removes sub-300Hz rumble and above-3400Hz content that would not
+    survive a real phone call.
+    """
+    sos = butter(5, [300, 3400], btype="bandpass", fs=sr, output="sos")
+    return sosfilt(sos, array).astype(np.float32)
 
 # ============================================
 # G.711 MU-LAW CODEC SIMULATION
@@ -48,11 +62,13 @@ def simulate_telephony(array: np.ndarray, orig_sr: int) -> tuple[np.ndarray, int
     """
     Full telephony simulation:
       1. Resample to 8kHz (narrow-band telephone audio)
-      2. Apply G.711 mu-law codec distortion
-      3. Simulate VoIP packet loss
+      2. Bandpass filter 300–3400 Hz (PSTN frequency range)
+      3. Apply G.711 mu-law codec distortion
+      4. Simulate VoIP packet loss
     Returns (processed_array, 8000).
     """
     audio = librosa.resample(array.astype(np.float32), orig_sr=orig_sr, target_sr=TELEPHONY_SAMPLE_RATE)
+    audio = apply_bandpass(audio, TELEPHONY_SAMPLE_RATE)
     audio = apply_g711_codec(audio)
     audio = apply_packet_loss(audio, TELEPHONY_SAMPLE_RATE)
     return audio, TELEPHONY_SAMPLE_RATE

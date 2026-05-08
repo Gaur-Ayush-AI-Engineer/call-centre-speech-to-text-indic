@@ -1,6 +1,4 @@
-# Call Centre Speech-to-Text — POC
-
-## Assignment
+# Call Centre Speech-to-Text
 
 Build a Speech-to-Text (STT) pipeline for call centre audio in **South Indian regional languages** (Tamil, Telugu, Kannada, Malayalam). The goal was to evaluate how well existing STT systems handle real-world call centre conditions and demonstrate a practical approach to the problem.
 

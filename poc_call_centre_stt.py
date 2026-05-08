@@ -7,9 +7,9 @@ import soundfile as sf
 from openai import OpenAI
 from jiwer import wer, cer, Compose, ToLowerCase, RemovePunctuation, Strip
 from dotenv import load_dotenv
-from preprocessing import preprocess
-from telephony_sim import simulate_telephony
-import indic_conformer
+from pipeline.preprocessing import preprocess
+from pipeline.telephony_sim import simulate_telephony
+import pipeline.indic_conformer as indic_conformer
 
 load_dotenv()
 

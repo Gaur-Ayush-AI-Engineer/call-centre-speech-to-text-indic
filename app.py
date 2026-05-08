@@ -11,8 +11,8 @@ import pandas as pd
 import streamlit as st
 from io import BytesIO
 from dotenv import load_dotenv
-from preprocessing import preprocess
-from telephony_sim import simulate_telephony
+from pipeline.preprocessing import preprocess
+from pipeline.telephony_sim import simulate_telephony
 
 warnings.filterwarnings("ignore", message="Accessing `__path__` from")
 

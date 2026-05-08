@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Call Centre STT — Architecture Diagrams</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background: #0f1117;
+    color: #e2e8f0;
+    padding: 40px 24px;
+  }
+  h1 {
+    text-align: center;
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: #f8fafc;
+    margin-bottom: 6px;
+    letter-spacing: -0.3px;
+  }
+  .subtitle {
+    text-align: center;
+    color: #94a3b8;
+    font-size: 0.9rem;
+    margin-bottom: 48px;
+  }
+  .section {
+    max-width: 960px;
+    margin: 0 auto 64px auto;
+  }
+  .section-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #7dd3fc;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 6px;
+    border-left: 3px solid #7dd3fc;
+    padding-left: 10px;
+  }
+  .section-desc {
+    color: #94a3b8;
+    font-size: 0.85rem;
+    margin-bottom: 20px;
+    padding-left: 13px;
+  }
+  .diagram-card {
+    background: #1e2330;
+    border: 1px solid #2d3348;
+    border-radius: 12px;
+    padding: 32px 24px;
+    overflow-x: auto;
+  }
+  .mermaid {
+    display: flex;
+    justify-content: center;
+  }
+  hr.divider {
+    border: none;
+    border-top: 1px solid #2d3348;
+    max-width: 960px;
+    margin: 0 auto 64px auto;
+  }
+</style>
+</head>
+<body>
+
+<h1>Call Centre STT — System Architecture</h1>
+<p class="subtitle">POC · South Indian Languages · Whisper · Sarvam · IndicConformer</p>
+
+<!-- ========= DIAGRAM 1: MAIN TRANSCRIPTION FLOW ========= -->
+<div class="section">
+  <div class="section-title">Diagram 1 — Main Transcription Flow (Tab 1)</div>
+  <div class="section-desc">How a single uploaded audio file is routed through Path A (voicemail / single speaker) or Path B (call recording / 2+ speakers).</div>
+  <div class="diagram-card">
+    <div class="mermaid">
+flowchart TD
+    UP([" Upload Audio File "]):::entry
+
+    UP --> DIAR["pyannote\nspeaker-diarization-3.1\n(runs on original audio)"]:::proc
+
+    DIAR --> DEC{{"How many\nunique speakers?"}}:::decision
+
+    %% ────────── PATH A ──────────
+    DEC -->|"1 speaker\n(voicemail)"| A1["Telephony Simulation\n─────────────────\n1. Resample → 8 kHz\n2. Bandpass 300–3400 Hz\n3. G.711 mu-law codec\n4. VoIP packet loss 2%"]:::pipe
+
+    A1 --> A2["Preprocessing\n─────────────────\n1. Silence trim\n2. Noise reduction\n3. Silero VAD\n4. Volume normalize"]:::pipe
+
+    A2 --> A3["Sarvam saaras:v3\nmode = transcribe\n→ original language text"]:::api
+
+    A3 --> A4["Sarvam saaras:v3\nmode = translate\n→ English text\n(skipped if already English)"]:::api
+
+    A4 --> A5["OpenAI gpt-4o-mini\n→ 2–3 sentence summary"]:::api
+
+    A5 --> XOUT[["Excel Row\nFilename · Language\nTranscription · Translation · Summary"]]:::out
+
+    %% ────────── PATH B ──────────
+    DEC -->|"2+ speakers\n(call recording)"| B1["Extract speaker turns\n(speaker, start_sec, end_sec)\n+ merge gaps ≤ 1.5 s"]:::proc
+
+    B1 --> B2["For each turn → slice\noriginal audio segment"]:::proc
+
+    B2 --> B3["Telephony Simulation\n(same 4-step pipeline)"]:::pipe
+
+    B3 --> B4["Preprocessing\n(same 4-step pipeline)"]:::pipe
+
+    B4 --> B5["Sarvam transcribe\n→ turn transcript"]:::api
+
+    B5 --> B6["Sarvam translate\n→ turn English text"]:::api
+
+    B6 --> B7["Assemble conversation block\n─────────────────────────\nSpeaker 1 [0.4s]: …\nSpeaker 2 [7.3s]: …\n…"]:::proc
+
+    B7 --> B8["OpenAI gpt-4o-mini\n→ 2–3 sentence summary"]:::api
+
+    B8 --> XOUT
+
+    classDef entry fill:#1d4ed8,stroke:#3b82f6,color:#fff,rx:8
+    classDef proc fill:#1e3a5f,stroke:#3b82f6,color:#cbd5e1
+    classDef pipe fill:#14532d,stroke:#22c55e,color:#d1fae5
+    classDef api fill:#4c1d95,stroke:#a855f7,color:#ede9fe
+    classDef decision fill:#7c2d12,stroke:#f97316,color:#fff
+    classDef out fill:#134e4a,stroke:#2dd4bf,color:#ccfbf1
+    </div>
+  </div>
+</div>
+
+<!-- ========= DIAGRAM 2: DIARIZATION DEEP DIVE ========= -->
+<div class="section">
+  <div class="section-title">Diagram 2 — Speaker Diarization (How pyannote works)</div>
+  <div class="section-desc">Internal steps pyannote runs, how turns are extracted, and how merging reduces fragmentation.</div>
+  <div class="diagram-card">
+    <div class="mermaid">
+flowchart TD
+    RAW([" Raw Audio (any sample rate) "]):::entry
+
+    RAW --> RES["Resample to 16 kHz\n(pyannote requirement)"]:::proc
+    RES --> TEN["Convert to PyTorch tensor\n{waveform, sample_rate}"]:::proc
+    TEN --> PYA["pyannote pipeline\nspeaker-diarization-3.1\n─────────────────────\n① Segmentation model detects\n   speech vs silence frames\n② Speaker embedding model\n   encodes each segment\n③ Clustering assigns segments\n   to speaker IDs"]:::proc
+
+    PYA --> RAW_TURNS["Raw turns (often fragmented)\n────────────────────────\nSpeaker 0: 0.0–2.1 s\nSpeaker 1: 2.3–4.0 s\nSpeaker 0: 4.1–4.6 s\nSpeaker 0: 4.7–6.2 s\n…"]:::data
+
+    RAW_TURNS --> MERGE{"Gap between consecutive\nsame-speaker turns\n≤ 1.5 s ?"}:::decision
+
+    MERGE -->|"Yes → merge"| MERGED["Merged turns\n─────────────────────────\nSpeaker 0: 0.0–2.1 s\nSpeaker 1: 2.3–4.0 s\nSpeaker 0: 4.1–6.2 s\n(4.1 and 4.7 merged)"]:::data
+
+    MERGE -->|"No → keep separate"| MERGED
+
+    MERGED --> COUNT["Count unique speaker IDs\n→ route to Path A or Path B"]:::proc
+
+    COUNT -->|"1 unique ID"| PA["Path A\n(single speaker)"]:::out
+    COUNT -->|"2+ unique IDs"| PB["Path B\n(multi-speaker)"]:::out
+
+    classDef entry fill:#1d4ed8,stroke:#3b82f6,color:#fff
+    classDef proc fill:#1e3a5f,stroke:#3b82f6,color:#cbd5e1
+    classDef data fill:#292524,stroke:#78716c,color:#d6d3d1
+    classDef decision fill:#7c2d12,stroke:#f97316,color:#fff
+    classDef out fill:#134e4a,stroke:#2dd4bf,color:#ccfbf1
+    </div>
+  </div>
+</div>
+
+<!-- ========= DIAGRAM 3: TELEPHONY SIM ========= -->
+<div class="section">
+  <div class="section-title">Diagram 3 — Telephony Simulation Pipeline (telephony_sim.py)</div>
+  <div class="section-desc">Why each step is needed — transforms studio-quality audio into realistic call-centre conditions before any model sees it.</div>
+  <div class="diagram-card">
+    <div class="mermaid">
+flowchart LR
+    IN([" Input Audio\n48 kHz studio "]):::entry
+
+    IN --> S1["① Resample\n→ 8 kHz\n─────────────\nPhone networks are\nnarrow-band: 8 kHz\nsampling is the\nITU-T standard"]:::step
+
+    S1 --> S2["② Bandpass Filter\n300–3400 Hz\n─────────────\nPSTN lines only\ntransmit this range.\nRemoves rumble\nand high-freq hiss"]:::step
+
+    S2 --> S3["③ G.711 mu-law Codec\nencode → quantize → decode\n─────────────────────────\nEvery real phone call\nruns through G.711.\nEncode compresses\ndynamic range to\n8-bit (256 levels).\nDecode round-trip\nbakes in distortion"]:::step
+
+    S3 --> S4["④ VoIP Packet Loss\n2% of 20 ms chunks\nzeroed out randomly\n─────────────────────\nNetwork jitter drops\npackets. Silence gaps\nappear mid-speech.\nModels must be\nrobust to this"]:::step
+
+    S4 --> OUT([" Output Audio\n8 kHz call-quality "]):::out
+
+    classDef entry fill:#1d4ed8,stroke:#3b82f6,color:#fff
+    classDef step fill:#14532d,stroke:#22c55e,color:#d1fae5
+    classDef out fill:#134e4a,stroke:#2dd4bf,color:#ccfbf1
+    </div>
+  </div>
+</div>
+
+<!-- ========= DIAGRAM 4: PREPROCESSING PIPELINE ========= -->
+<div class="section">
+  <div class="section-title">Diagram 4 — Audio Preprocessing Pipeline (preprocessing.py)</div>
+  <div class="section-desc">Runs after telephony simulation. Each step is independently toggleable. Order is load-bearing — do not swap steps.</div>
+  <div class="diagram-card">
+    <div class="mermaid">
+flowchart LR
+    IN([" 8 kHz\ncall-sim audio "]):::entry
+
+    IN --> P1["① Silence Trim\n─────────────\nStrips dead air from\nstart and end.\nDone first so noise\nreduction doesn't\nwaste cycles on\nsilent edges"]:::step
+
+    P1 --> P2["② Noise Reduction\n(noisereduce lib)\n─────────────────\nSpectral gating\nsuppresses static,\nhiss, background\nnoise. Applied\nbefore VAD so VAD\nsees a cleaner signal"]:::step
+
+    P2 --> P3["③ Voice Activity Detection\n(Silero VAD)\n──────────────────────────\nNeural-network VAD\nidentifies speech\nframes. Non-speech\nsegments dropped.\nRuns before normalize\nso original energy\nlevels are visible"]:::step
+
+    P3 --> P4["④ Volume Normalization\n(pyloudnorm LUFS)\n────────────────────\nEqualizes loudness\nacross speakers and\nrecordings. Applied\nlast — normalizing\nearlier would\ndistort VAD results"]:::step
+
+    P4 --> OUT([" Clean speech\nready for STT "]):::out
+
+    classDef entry fill:#1d4ed8,stroke:#3b82f6,color:#fff
+    classDef step fill:#4c1d95,stroke:#a855f7,color:#ede9fe
+    classDef out fill:#134e4a,stroke:#2dd4bf,color:#ccfbf1
+    </div>
+  </div>
+</div>
+
+<!-- ========= DIAGRAM 5: FULL PIPELINE OVERVIEW ========= -->
+<div class="section">
+  <div class="section-title">Diagram 5 — End-to-End Pipeline Overview (pipeline/ modules)</div>
+  <div class="section-desc">How the three modules in pipeline/ connect. Each is independently importable and testable.</div>
+  <div class="diagram-card">
+    <div class="mermaid">
+flowchart TD
+    AU([" Raw Audio "]):::entry
+
+    subgraph TSIM ["pipeline/telephony_sim.py"]
+        direction TB
+        T1["simulate_telephony()"]:::proc
+        T2["apply_bandpass()"]:::proc
+        T3["apply_g711_codec()"]:::proc
+        T4["apply_packet_loss()"]:::proc
+        T1 --> T2 --> T3 --> T4
+    end
+
+    subgraph PRE ["pipeline/preprocessing.py"]
+        direction TB
+        P1["preprocess()"]:::proc
+        P2["silence trim"]:::proc
+        P3["noise reduce"]:::proc
+        P4["Silero VAD"]:::proc
+        P5["normalize"]:::proc
+        P1 --> P2 --> P3 --> P4 --> P5
+    end
+
+    subgraph IC ["pipeline/indic_conformer.py"]
+        direction TB
+        IC1["load_model()"]:::proc
+        IC2["transcribe(wav, lang)"]:::proc
+        IC1 --> IC2
+    end
+
+    AU --> TSIM
+    TSIM --> PRE
+    PRE --> SARVAM["Sarvam saaras:v3\n(app.py)"]:::api
+    PRE --> WHISPER["Whisper large-v3\nvia Groq API\n(poc_call_centre_stt.py)"]:::api
+    PRE --> IC
+
+    SARVAM --> OUT([" Transcript + Translation "]):::out
+    WHISPER --> OUT2([" Transcript (WER eval) "]):::out
+    IC --> OUT2
+
+    classDef entry fill:#1d4ed8,stroke:#3b82f6,color:#fff
+    classDef proc fill:#1e3a5f,stroke:#3b82f6,color:#cbd5e1
+    classDef api fill:#4c1d95,stroke:#a855f7,color:#ede9fe
+    classDef out fill:#134e4a,stroke:#2dd4bf,color:#ccfbf1
+    </div>
+  </div>
+</div>
+
+<script>
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'dark',
+    themeVariables: {
+      darkMode: true,
+      background: '#1e2330',
+      primaryColor: '#1e3a5f',
+      primaryTextColor: '#e2e8f0',
+      primaryBorderColor: '#3b82f6',
+      lineColor: '#64748b',
+      secondaryColor: '#14532d',
+      tertiaryColor: '#292524',
+      fontSize: '14px'
+    },
+    flowchart: {
+      htmlLabels: true,
+      curve: 'basis',
+      padding: 20
+    }
+  });
+</script>
+</body>
+</html>
